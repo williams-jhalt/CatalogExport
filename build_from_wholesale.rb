@@ -171,9 +171,9 @@ class DownloadExporter
 		puts "Begin writing categories.csv ... "
 		write_category_tree
 		puts "complete!"
-		puts "Begin writing categories_flat.csv ... "
-		write_categories
-		puts "complete!"
+		#puts "Begin writing categories_flat.csv ... "
+		#write_categories
+		#puts "complete!"
 		puts "Begin writing descriptions ... "
 		write_product_descriptions
 		puts "complete!"
@@ -339,8 +339,10 @@ class DownloadExporter
 		parent = category[:parent]
 		while parent != "0"
 			parentCategory = categories[parent]
-			name.prepend("#{parentCategory[:name]} / ")
-			parent = parentCategory[:parent]
+			unless name.nil?
+				name.prepend("#{parentCategory[:name]} / ")
+				parent = parentCategory[:parent]
+			end
 		end
 		return name
 	end
