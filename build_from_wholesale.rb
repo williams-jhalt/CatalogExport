@@ -277,7 +277,7 @@ class DownloadExporter
 	
 	def write_product_descriptions
 		for key, value in handler.descriptions
-			FileUtils.mkdir_p("./export/descriptions/#{key}") unless File.exist?("./export/images/#{key}")		
+			FileUtils.mkdir_p("./export/descriptions/#{key}") unless File.exist?("./export/descriptions/#{key}")		
 			File.open("./export/descriptions/#{key}/description.txt", "w+") do |file| 
 				file.write(value)
 			end
@@ -339,10 +339,8 @@ class DownloadExporter
 		parent = category[:parent]
 		while parent != "0"
 			parentCategory = categories[parent]
-			unless name.nil?
-				name.prepend("#{parentCategory[:name]} / ")
-				parent = parentCategory[:parent]
-			end
+			name.prepend("#{parentCategory[:name]} / ")
+			parent = parentCategory[:parent]
 		end
 		return name
 	end
